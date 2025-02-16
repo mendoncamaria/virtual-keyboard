@@ -141,11 +141,13 @@ export default function Keyboard() {
             : keyText.toLowerCase();
         }
 
-        if (keyText === 'caps lock') {
-          key.style.backgroundColor = isCaps ? 'blue' : '#445760';
-        }
-        if (keyText === 'shift') {
-          key.style.backgroundColor = isShift ? 'blue' : '#445760';
+        if (key instanceof HTMLElement) {
+          if (keyText === 'caps lock') {
+            key.style.backgroundColor = isCaps ? 'blue' : '#445760';
+          }
+          if (keyText === 'shift') {
+            key.style.backgroundColor = isShift ? 'blue' : '#445760';
+          }
         }
       }
     });
