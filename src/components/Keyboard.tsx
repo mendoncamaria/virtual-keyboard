@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Keyboard.css';
-import { FaDeleteLeft } from "react-icons/fa6";
+import { FaDeleteLeft } from 'react-icons/fa6';
 
 interface KeyProps {
   keyvalue: string;
@@ -14,9 +14,13 @@ const Key: React.FC<KeyProps> = ({ keyvalue, onClick }) => {
 
   const renderContent = () => {
     if (keyvalue.includes('_')) {
-      return keyvalue.split('_').map((part, index) => <span key={index}>{part}</span>);
+      return keyvalue
+        .split('_')
+        .map((part, index) => <span key={index}>{part}</span>);
     } else if (keyvalue.includes('.')) {
-      return keyvalue.split('.').map((part, index) => <span key={index}>{part}</span>);
+      return keyvalue
+        .split('.')
+        .map((part, index) => <span key={index}>{part}</span>);
     } else if (keyvalue === '<FaDeleteLeft />') {
       return <FaDeleteLeft />;
     } else {
@@ -30,7 +34,6 @@ const Key: React.FC<KeyProps> = ({ keyvalue, onClick }) => {
     </div>
   );
 };
-
 
 export default function Keyboard() {
   const [inputText, setInputText] = useState('');
@@ -100,12 +103,19 @@ export default function Keyboard() {
     let newContent: string;
     if (keys.length > 1) {
       if (isShift) {
-        newContent = keys.length === 3 && keys[0] === '>' ? inputText + '>' : inputText + keys[0];
+        newContent =
+          keys.length === 3 && keys[0] === '>'
+            ? inputText + '>'
+            : inputText + keys[0];
       } else {
-        newContent = keys.length === 3 && keys[0] === '>' ? inputText + '.' : inputText + keys[1];
+        newContent =
+          keys.length === 3 && keys[0] === '>'
+            ? inputText + '.'
+            : inputText + keys[1];
       }
     } else {
-      const character = (isShift === isCaps) ? key.toLowerCase() : key.toUpperCase();
+      const character =
+        isShift === isCaps ? key.toLowerCase() : key.toUpperCase();
       newContent = inputText + character;
     }
     setInputText(newContent);
@@ -116,13 +126,21 @@ export default function Keyboard() {
     keys.forEach((key) => {
       const firstSpanElement = key.querySelector('span:first-child');
       if (firstSpanElement) {
-        const keyText = firstSpanElement.innerText.toLowerCase();
-        const shouldUpper = (isShift === isCaps);
+        const keyText = (
+          firstSpanElement as HTMLSpanElement
+        ).innerText.toLowerCase();
+        const shouldUpper = isShift === isCaps;
+
         if (
-          !['shift', 'alt', 'ctrl', 'enter', 'caps lock', 'tab'].includes(keyText)
+          !['shift', 'alt', 'ctrl', 'enter', 'caps lock', 'tab'].includes(
+            keyText
+          )
         ) {
-          firstSpanElement.innerText = shouldUpper ? keyText.toUpperCase() : keyText.toLowerCase();
+          (firstSpanElement as HTMLSpanElement).innerText = shouldUpper
+            ? keyText.toUpperCase()
+            : keyText.toLowerCase();
         }
+
         if (keyText === 'caps lock') {
           key.style.backgroundColor = isCaps ? 'blue' : '#445760';
         }
@@ -133,12 +151,58 @@ export default function Keyboard() {
     });
   };
 
-
+  useEffect(() => {
+    updateKeyLabels();
+  }, [isCaps, isShift]);
 
   const keyRows = [
-    ['~.`', '!.1', '@.2', '#.3', '$.4', '%.5', '^.6', '&.7', '*.8', '(.9', ').0', '_.-', '+.=', '<FaDeleteLeft />'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{_[', '}_]', '|_\\'],
-    ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':;', '\'', 'Enter'],
+    [
+      '~.`',
+      '!.1',
+      '@.2',
+      '#.3',
+      '$.4',
+      '%.5',
+      '^.6',
+      '&.7',
+      '*.8',
+      '(.9',
+      ').0',
+      '_.-',
+      '+.=',
+      '<FaDeleteLeft />',
+    ],
+    [
+      'Tab',
+      'q',
+      'w',
+      'e',
+      'r',
+      't',
+      'y',
+      'u',
+      'i',
+      'o',
+      'p',
+      '{_[',
+      '}_]',
+      '|_\\',
+    ],
+    [
+      'Caps Lock',
+      'a',
+      's',
+      'd',
+      'f',
+      'g',
+      'h',
+      'j',
+      'k',
+      'l',
+      ':;',
+      "'",
+      'Enter',
+    ],
     ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<_,', '>_.', '?_/', 'Shift'],
     ['Ctrl', 'Alt', ' ', 'Ctrl', 'Alt', '<', '>'],
   ];
@@ -153,7 +217,11 @@ export default function Keyboard() {
           {keyRows.map((row, rowIndex) => (
             <div className="row" key={rowIndex}>
               {row.map((keyvalue) => (
-                <Key key={keyvalue} keyvalue={keyvalue} onClick={handleKeyClick} />
+                <Key
+                  key={keyvalue}
+                  keyvalue={keyvalue}
+                  onClick={handleKeyClick}
+                />
               ))}
             </div>
           ))}
