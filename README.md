@@ -1,50 +1,35 @@
-# React + TypeScript + Vite
+# 📦 <font color="red">[ARCHIVED]</font> Virtual Keyboard Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Status:** <font color="red">🔴 <b>Archived / Read-Only</b></font>  
+> Built as an interactive UI exercise to practice custom DOM event handling, keyboard input mapping, and state-driven text editing in React with TypeScript. Preserved as a historical project snapshot and is no longer maintained.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+* **Framework & Build Tool:** ReactJS + Vite
+* **Language:** TypeScript
+* **Deployment Platform:** Vercel
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## ✨ Core Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+* **Interactive On-Screen Input:** On-screen key presses directly sync and manipulate text inside the active text field.
+* **Full Keyboard Layout Support:** Dynamic handling for alphanumeric keys, Shift, Caps Lock, Space, Enter, and Backspace logic.
+* **Event & State Management:** Custom input handler managing cursor positions and character insertions.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 💻 Local Development Setup
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+# Clone the repository
+git clone <your-repository-url>
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
 ```
